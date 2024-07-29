@@ -1,34 +1,55 @@
 {
-	type ReduceCallback<T, U> = (accumulator: U, currentValue: T, index: number, array: T[]) => U;
+  type ReduceCallback<T, U> = (
+    accumulator: U,
+    currentValue: T,
+    index: number,
+    array: T[]
+  ) => U;
 
-	//  your code here
-	function myReducer<T, U>(array: T[], callback: ReduceCallback<T, U>, initialValue?: U): U {
-		let accumulator: U;
+  //  your code here
 
-		if (initialValue === undefined) {
-			if (array.length === 0) {
-				throw new TypeError('Reduce of empty array with no initial value');
-			}
-			accumulator = array[0] as unknown as U;
-			for (let i = 1; i < array.length; i++) {
-				accumulator = callback(accumulator, array[i], i, array);
-			}
-		} else {
-			accumulator = initialValue;
-			for (let i = 0; i < array.length; i++) {
-				accumulator = callback(accumulator, array[i], i, array);
-			}
-		}
+  function myReducer<T, U extends T>(
+    array: T[],
+    callback: ReduceCallback<T, U>
+  ): U;
 
-		return accumulator;
-	}
+  function myReducer<T, U>(
+    array: T[],
+    callback: ReduceCallback<T, U>,
+    initialValue: U
+  ): U;
 
-	const numbers: number[] = [1, 2, 3, 4, 5];
+  function myReducer<T, U>(
+    array: T[],
+    callback: ReduceCallback<T, U>,
+    initialValue?: U
+  ): U {
+    let accumulator: U;
 
-	const sum = myReducer(numbers, (acc, value) => acc + value);
-	console.log(sum); // 15
+    if (initialValue === undefined) {
+      if (array.length === 0) {
+        throw new TypeError("Reduce of empty array with no initial value");
+      }
+      accumulator = array[0] as unknown as U;
+      for (let i = 1; i < array.length; i++) {
+        accumulator = callback(accumulator, array[i], i, array);
+      }
+    } else {
+      accumulator = initialValue;
+      for (let i = 0; i < array.length; i++) {
+        accumulator = callback(accumulator, array[i], i, array);
+      }
+    }
 
-	const strings: string[] = ['Hello', ' ', 'world', '!'];
-	const concatenated = myReducer(strings, (acc, value) => acc + value, '');
-	console.log(concatenated);
+    return accumulator;
+  }
+
+  const numbers: number[] = [1, 2, 3, 4, 5];
+
+  const sum = myReducer(numbers, (acc, value) => acc + value);
+  console.log(sum); // 15
+
+  const strings: string[] = ["Hello", " ", "world", "!"];
+  const concatenated = myReducer(strings, (acc, value) => acc + value, "");
+  console.log(concatenated);
 }

@@ -111,7 +111,15 @@
     "e-19.4": "tt-cli run 19.4",
     "s-19.4": "tt-cli run 19.4 --solution",
     "e-22.5": "tt-cli run 22.5",
-    "s-22.5": "tt-cli run 22.5 --solution"
+    "s-22.5": "tt-cli run 22.5 --solution",
+    "e-1": "tt-cli run 1",
+    "s-1": "tt-cli run 1 --solution",
+    "e-2": "tt-cli run 2",
+    "s-2": "tt-cli run 2 --solution",
+    "e-3": "tt-cli run 3",
+    "s-3": "tt-cli run 3 --solution",
+    "e-4": "tt-cli run 4",
+    "s-4": "tt-cli run 4 --solution"
   },
   "dependencies": {
     "@types/express": "^4.17.14",
